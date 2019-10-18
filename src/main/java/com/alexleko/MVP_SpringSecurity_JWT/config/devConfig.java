@@ -9,9 +9,4 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Profile("dev")
 public class devConfig {
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 }
