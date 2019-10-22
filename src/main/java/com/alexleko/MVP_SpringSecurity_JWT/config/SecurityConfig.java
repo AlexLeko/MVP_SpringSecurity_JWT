@@ -24,7 +24,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true) // permite utilizar o @PreAuthorize em cada endpoint.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -36,7 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JWTUtil jwtUtil;
 
-
+    // ===================================================
+    // endpoints com acesso livre, conforme o verbo REST.
 
     // caminhos de test
     private static final String[] PUBLIC_MATCHERS = {
@@ -45,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // caminhos de leitura [GET]
     private static final String[] PUBLIC_MATCHERS_GET = {
-            "/planos/**"
+            "/clientes/**"          // *** liberado somente por questão de exemplo de teste ***
     };
 
     // cadastros permitidos [POST]
@@ -53,6 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/clientes",
             "/auth/forgot/**"
     };
+    // ===================================================
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

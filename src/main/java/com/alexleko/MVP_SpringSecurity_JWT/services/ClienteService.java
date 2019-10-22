@@ -11,6 +11,8 @@ public interface ClienteService {
 
     List<Cliente> findAll();
 
+    void delete(Integer id);
+
     Cliente convertFromDTO(ClienteNewDTO dto);
 
 }

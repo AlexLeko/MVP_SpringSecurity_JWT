@@ -6,10 +6,7 @@ import com.alexleko.MVP_SpringSecurity_JWT.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -45,5 +42,12 @@ public class ClienteController {
         return ResponseEntity.ok().body(list); // status: 200 OK
     }
 
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        clienteService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
