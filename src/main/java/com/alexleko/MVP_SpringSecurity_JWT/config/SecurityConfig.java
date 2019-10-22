@@ -1,6 +1,7 @@
 package com.alexleko.MVP_SpringSecurity_JWT.config;
 
 import com.alexleko.MVP_SpringSecurity_JWT.security.JWTAuthenticationFilter;
+import com.alexleko.MVP_SpringSecurity_JWT.security.JWTAuthorizationFilter;
 import com.alexleko.MVP_SpringSecurity_JWT.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -75,8 +76,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
 
-        // registrar o filtro de autenticação
+        // registrar o filtro de  === AUTENTICAÇÃO ===
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+
+
+        // registrar o filtro de === AUTORIZAÇÃO ===
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 
 
         // garante que o back-end não crie sessão de usuario.

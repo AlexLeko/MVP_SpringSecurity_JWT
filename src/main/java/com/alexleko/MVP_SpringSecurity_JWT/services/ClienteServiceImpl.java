@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
@@ -27,11 +29,19 @@ public class ClienteServiceImpl implements ClienteService {
         return cliente;
     }
 
+    public List<Cliente> findAll(){
+        return clienteRepository.findAll();
+    }
+
+
+
     @Override
     public Cliente convertFromDTO(ClienteNewDTO dto){
         Cliente cliente = new Cliente(null, dto.getNome(), dto.getEmail(), passwordEncoder.encode(dto.getSenha()));
         return cliente;
     }
+
+
 
 }
 
